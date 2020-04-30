@@ -313,13 +313,13 @@ BBIO_err pwm_setup(const char *key, __attribute__ ((unused)) float duty, __attri
     char pwm_addr_path[150];	// "/sys/devices/platform/ocp/48300000.epwmss/48300200.ehrpwm"
     char pwm_chip_path[200]; 	// "/sys/devices/platform/ocp/48300000.epwmss/48300200.ehrpwm/pwm/pwmchip0"
     char pwm_export_path[250]; 	// "/sys/devices/platform/ocp/48300000.epwmss/48300200.ehrpwm/pwm/pwmchip0/export"
-    char pwm_path[250]; 	// "/sys/devices/platform/ocp/48300000.epwmss/48300200.ehrpwm/pwm/pwmchip0/pwm2"
+    char pwm_path[300]; 	// "/sys/devices/platform/ocp/48300000.epwmss/48300200.ehrpwm/pwm/pwmchip0/pwm2"
     char pwm_path_udev[250]; 	// "/sys/devices/platform/ocp/48300000.epwmss/48300200.ehrpwm/pwm/pwmchip0/pwm-0:2"
     char ecap_path_udev[300];	// "/sys/devices/platform/ocp/48300000.epwmss/48300200.ecap/pwm/pwmchip0/pwm-0:0/"
-    char duty_path[300]; 	// "/sys/devices/platform/ocp/48300000.epwmss/48300200.ehrpwm/pwm/pwmchip0/pwm2/duty_cycle"
-    char period_path[300];
-    char polarity_path[300];
-    char enable_path[300];
+    char duty_path[450]; 	// "/sys/devices/platform/ocp/48300000.epwmss/48300200.ehrpwm/pwm/pwmchip0/pwm2/duty_cycle"
+    char period_path[450];
+    char polarity_path[450];
+    char enable_path[450];
     char pin_mode[PIN_MODE_LEN]; // "pwm" or "pwm2"
 
     int e;
@@ -339,7 +339,7 @@ BBIO_err pwm_setup(const char *key, __attribute__ ((unused)) float duty, __attri
     // Make sure that one of the universal capes is loaded
     if( !uboot_overlay_enabled() // only check kernel overlays if u-boot overlays are not being used
         &&
-        !beaglebone_blue() // beaglebone blue has complete dtb file and does not need overlays 
+        !beaglebone_blue() // beaglebone blue has complete dtb file and does not need overlays
         &&
         !pocketbeagle() // pocketbeagle has complete dtb file and does not need overlays
         &&

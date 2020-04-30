@@ -55,7 +55,7 @@ BBIO_err initialize_adc(void)
 #ifdef BBBVERSION41
     err = load_device_tree("BB-ADC");
     if (err == BBIO_OK) {
-        strncat(adc_prefix_dir, "/sys/bus/iio/devices/iio:device0/in_voltage", sizeof(adc_prefix_dir));
+        strncat(adc_prefix_dir, "/sys/bus/iio/devices/iio:device0/in_voltage", sizeof(adc_prefix_dir) - 1);
         snprintf(test_path, sizeof(test_path), "%s%d_raw", adc_prefix_dir, 1);
         sleep(1);
         fh = fopen(test_path, "r");
@@ -103,7 +103,7 @@ BBIO_err read_value(unsigned int ain, float *value)
 
     int err, try_count=0;
     int read_successful;
-    
+
     read_successful = 0;
 
     // Workaround to AIN bug where reading from more than one AIN would cause access failures
@@ -111,7 +111,7 @@ BBIO_err read_value(unsigned int ain, float *value)
     {
         fh = fopen(ain_path, "r");
 
-        // Likely a bad path to the ocp device driver 
+        // Likely a bad path to the ocp device driver
         if (!fh) {
             return BBIO_SYSFS;
         }
